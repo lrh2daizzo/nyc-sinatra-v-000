@@ -1,11 +1,6 @@
-<h1>Landmarks: </h1>
-<ul>
+<h1>Landmarks</h1>
 <% @landmarks.each do |landmark| %>
-<li><label>Name: </label><%= landmark.name %></label></li>
-<label>Year: <%= landmark.year_completed %></label>
-<br></br>
+    <li><label><%= landmark.name %></label></li>
+    <label>Year: <%= landmark.year_completed %></label>
+    <br></br>
 <% end %>
-</ul>
-
-<a class="button" href="/figures">Figures</a>
-<a class="button" href="/">Home</a>

@@ -1,32 +1,30 @@
-<h2>Edit Historical Figure</h2>
-<form action="/figures/<%= @figure.id%>" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <label>Name</label>
-  <input type="text" id="figure_name" name="figure[name]" value="<%= @figure.name%>"><br></br>
-  <label>Edit Landmarks:</label><br>
+<h1>Edit <%= @figure.name %></h1>
+<form action="/figures/<%=@figure.id%>" method="POST">
+<input type="hidden" name="_method" value="PATCH">
 
-  <% Landmark.all.each do |landmark| %>
-   <label><%= landmark.name %></label>
-   <input type="checkbox" name="figure[landmark_ids][]" value="<%= landmark.id %>" id="<%= landmark.name %>" <%='checked' if @figure.landmarks.include?(landmark) %>>
- <% end %>
-<label>Add New:</label>
-<input type="text" id="new_landmark" name="landmark[name]"><br></br>
+<label for="figure_name">Name </label>
+<input type="text" name="figure[name]" id="figure_name" value="<%= @figure.name %>">
 
-
-<label>Edit Titles</label><br>
+<h3>Titles</h3>
 <% Title.all.each do |title| %>
-   <label><%= title.name %></label>
-   <input type="checkbox" name="figure[title_ids][]" value="<%= title.id %>" id="<%= title.name %>" <%='checked' if @figure.titles.include?(title) %>>
- <% end %></br>
-<label>Add New Title:</label>
-<input type="text" id="new_title" name="title[name]"><br></br>
+    <input type="checkbox" name="figure[title_ids][]" id="title_<%= title.id %>" value="<%= title.id %>" <%='checked' if @figure.titles.include?(title)%>><%= title.name %></input>
+    <br>
+<% end %>
 
+<h3>Create New Title: </h3>
+<input type="text" name="title[name]" id="new_title">
 
+<h3>Landmarks</h3>
+<% Landmark.all.each do |landmark| %>
+    <input type="checkbox" name="figure[landmark_ids][]" id="landmark_<%= landmark.id %>" value="<%= landmark.id %>" <%='checked' if @figure.landmarks.include?(landmark)%>><%= landmark.name %></input>
+    <br>
+<% end %>
 
+<h3>Create New Landmark:</h3>
+    <label for="landmark[name]">Name: </label>
+    <input type="text" name="landmark[name]" id="new_landmark">
+    <label for="landmark[year]">Year: </label>
+    <input type="text" name="landmark[year_completed]" id="landmark_year">
 
- <input type="submit" value="Edit Figure">
-
+<input type="submit" value="Edit Figure">
 </form>
-
-<a class="button" href="/figures">Figures</a>
-<a class="button" href="/">Home</a>
